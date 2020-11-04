@@ -1,0 +1,110 @@
+#page {
+    padding-bottom: 60px;
+}
+
+.v-text-field {
+    position: relative;
+    margin-top: 18px;
+}
+
+.v-text-field .v-input__control,
+.v-text-field .v-input__slot,
+.v-text-field .v-text-field__slot,
+.v-text-field .v-menu,
+.v-text-field .v-menu__activator {
+    position: unset;
+}
+
+.v-text-field .v-input__append-outer,
+.v-text-field .v-input__prepend-outer {
+    margin-top: 18px;
+    margin-bottom: 8px;
+}
+
+.v-text-field .v-input__append-inner,
+.v-text-field .v-input__prepend-inner {
+    align-self: center;
+    margin: 0;
+    padding: 0;
+}
+
+.v-text-field .v-input__prepend-inner {
+    margin-right: 8px;
+}
+
+.v-text-field .v-input__append-inner {
+    margin-left: 8px;
+}
+
+.v-text-field .v-input__slot {
+    height: 45px;
+    padding: 4px;
+    margin-bottom: unset;
+    border: 1px solid #2384F8;
+    border-radius: 0.25em;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.v-text-field .v-input__slot:before {
+    display: none;
+}
+
+.v-text-field .v-input__slot:after {
+    display: none;
+}
+
+.v-text-field .v-input__slot input {
+    padding: 10px 5px;
+}
+
+.v-text-field .v-input__slot label {
+    transform: translateY(-55px);
+    font-size: 18px;
+    transition: color 0.2s ease-in-out;
+}
+
+.v-text-field.v-input--is-disabled .v-input__slot {
+    background-color: #eee;
+}
+
+.v-text-field.v-input--has-state.error--text:not(.v-input--is-focused) .v-input__slot {
+    border-color: #ff5252;
+}
+
+.v-text-field.v-input--is-focused .v-input__slot {
+    border-color: #04b7bd;
+}
+
+.v-text-field.v-input--is-focused:not(.v-input--has-state):not(.error--text) .v-label {
+    color: #04b7bd !important;
+}
+
+.v-text-field.v-input--is-focused:not(.v-input--has-state):not(.error--text) .v-input__append-inner i,
+.v-text-field.v-input--is-focused:not(.v-input--has-state):not(.error--text) .v-input__append-outer i,
+.v-text-field.v-input--is-focused:not(.v-input--has-state):not(.error--text) .v-input__prepend-inner i,
+.v-text-field.v-input--is-focused:not(.v-input--has-state):not(.error--text) .v-input__prepend-outer i {
+    color: #04b7bd !important;
+    transition: color 0.15s ease-in-out;
+}
+
+.v-text-field .v-progress-linear {
+    top: calc(35px + 2px);
+    left: 8px;
+    width: calc(100% - 8px * 2);
+    border-radius: 2px;
+}
+
+.menu__content--select {
+    border-radius: 10px;
+}
+
+.v-text-field.v-input--is-disabled .v-input__slot {
+    /* background-color: #eee; */
+    background-color: transparent;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #CED1D8;
+    label {
+        transform: translateY(-35px);
+    }
+}
