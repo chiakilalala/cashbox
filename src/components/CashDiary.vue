@@ -1,8 +1,7 @@
 <template>
   <v-container
-            class="fill-height diary"
+            class=" diary"
             fluid
-          height="768px"
     >
       <v-row justify="end" cols="12">
       <v-alert border="left" color="blue" class="text-gray-100 mr-5" dense >
@@ -12,6 +11,7 @@
       <v-row
               justify="center"
               class=""
+              no-gutters
       >
     <div class="w-full lg:1/2  p-4">
     <v-data-table

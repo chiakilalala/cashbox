@@ -1,5 +1,5 @@
 <template>
-  <v-container class="fill-height" height="768px">
+  <v-container class="" height="768px">
     <v-row justify="end" cols="12">
       <v-alert border="left" color="blue mr-5 white-text" dense >
         現金櫃狀態 </v-alert
@@ -17,59 +17,59 @@
           <div class="p-4 bg-white rounded-b ">
             <table class="w-full text-base table-auto">
               <tr>
-                <th class="text-left py-2">存入鈔票水位</th>
+                <th class="text-left pb-1">存入鈔票水位</th>
                 <td class="text-left">0: Normal</td>
               </tr>
               <tr>
-                <th class="text-left py-2">取出鈔票水位</th>
+                <th class="text-left pb-1">取出鈔票水位</th>
                 <td class="text-left">0: Normal</td>
               </tr>
               <tr>
-                <th class="text-left py-2">鈔票狀態</th>
+                <th class="text-left pb-1">鈔票狀態</th>
                 <td class="text-left">0: Normal</td>
               </tr>
               <tr>
-                <th class="text-left py-2">鈔票錯誤代號</th>
+                <th class="text-left pb-1">鈔票錯誤代號</th>
                 <td class="text-left">0: Normal</td>
               </tr>
               <tr>
-                <th class="text-left py-2">現金櫃狀態</th>
+                <th class="text-left pb-1">現金櫃狀態</th>
                 <td class="text-left">DISABLED = (-7)</td>
               </tr>
               <tr>
-                <th class="text-left py-2">錯誤狀態</th>
+                <th class="text-left pb-1">錯誤狀態</th>
                 <td class="text-left">ENTRYEXIST = (-13) (No Available)</td>
               </tr>
               <tr>
-                <th class="text-left py-2">錯誤代號</th>
+                <th class="text-left pb-1">錯誤代號</th>
                 <td class="text-left">TCR_ERROR_SEQUENCE = -101</td>
               </tr>
               <tr>
-                <th class="text-left py-2"><span class="text-red-700">*</span>鈔票金額</th>
+                <th class="text-left pb-1"><span class="text-red-700">*</span>鈔票金額</th>
                 <td class="text-left">1,000</td>
               </tr>
               <tr>
-                <th class="text-left py-2"><span class="text-red-700">*</span>鈔票取出金額</th>
+                <th class="text-left pb-1"><span class="text-red-700">*</span>鈔票取出金額</th>
                 <td class="text-left">1,000</td>
               </tr>
               <tr>
-                <th class="text-left py-2"><span class="text-red-700">*</span>鈔票存入金額</th>
+                <th class="text-left pb-1"><span class="text-red-700">*</span>鈔票存入金額</th>
                 <td class="text-left">1,000</td>
               </tr>
               <tr>
-                <th class="text-left py-2"><span class="text-red-700">*</span>鈔票裝載金額</th>
+                <th class="text-left pb-1"><span class="text-red-700">*</span>鈔票裝載金額</th>
                 <td class="text-left">1,000</td>
               </tr>
               <tr>
-                <th class="text-left py-2"><span class="text-red-700">*</span>鈔票卸除金額</th>
+                <th class="text-left pb-1"><span class="text-red-700">*</span>鈔票卸除金額</th>
                 <td class="text-left">1,000</td>
               </tr>
                 <tr>
-                <th class="text-left py-2"><span class="text-red-700">*</span>鈔票取出次數</th>
+                <th class="text-left pb-1"><span class="text-red-700">*</span>鈔票取出次數</th>
                 <td class="text-left">1</td>
               </tr>
               <tr>
-                <th class="text-left py-2"><span class="text-red-700">*</span>鈔票存入次數</th>
+                <th class="text-left pb-1"><span class="text-red-700">*</span>鈔票存入次數</th>
                 <td class="text-left">1</td>
               </tr>
             </table>

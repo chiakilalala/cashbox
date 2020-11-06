@@ -1,0 +1,291 @@
+/* Global */
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.container2 {
+    width: 60%;
+    margin: auto;
+    overflow: hidden;
+    height: 594px;
+    overflow: hidden;
+}
+
+.notice {
+    margin: 240px auto 80px;
+}
+
+.notice2 {
+    margin: 180px auto 80px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.button_1 {
+    height: 38px;
+    background: #e8491d;
+    border: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #ffffff;
+}
+
+.dark {
+    padding: 15px;
+    background: #35424a;
+    color: #ffffff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+/* Header **/
+
+header {
+    /*background:#D80B18;*/
+    color: #666666;
+    /*padding-top:30px;*/
+    min-height: 70px;
+    border-top: #e8491d 10px solid;
+}
+
+header li {
+    float: left;
+    display: inline;
+    padding: 0 20px 0 20px;
+}
+
+header #branding {
+    float: left;
+}
+
+header #branding h1 {
+    margin: 0;
+}
+
+header nav {
+    float: right;
+    margin-top: 32px;
+    font-weight: bold;
+}
+
+header nav .date {
+    float: right;
+}
+
+
+/* Main-col */
+
+div#main-col {
+    /*float:left;*/
+    /*width:85%;*/
+    text-align: center;
+    margin-top: 80px;
+}
+
+#main-col h1 {
+    font-size: 40px;
+    color: #666666;
+    text-align: center;
+}
+
+#main-col h2 {
+    font-size: 30px;
+    color: #666666;
+    text-align: center;
+}
+
+
+/* Services */
+
+ul#services li {
+    list-style: none;
+    padding: 100px 40px;
+    // border: #cccccc solid 5px;
+    margin-bottom: 50px;
+    background: #e6e6e6;
+    border-radius: 20px;
+}
+
+#services h1 {
+    font-size: 30px;
+}
+
+footer {
+    /*padding:8px;*/
+    /*margin-top:20px;*/
+    color: #ffffff;
+    background-color: #D80B18;
+    /*text-align: center;*/
+}
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+}
+
+footer .left_logo {
+    float: left;
+    width: 90%;
+    background: #D80B18;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10%;
+}
+
+footer .right_logo {
+    float: right;
+    background: #888888;
+    padding-right: 10%;
+    padding-left: 1%;
+    height: 30px;
+    line-height: 30px;
+}
+
+.text_center {
+    text-align: center;
+    margin: 25px;
+}
+
+.btn_red,
+.btn_gray {
+    position: relative;
+    display: inline-block;
+    /*padding: 1.2em 2em;*/
+    /*padding: 0.5em 2em;*/
+    padding: 5px 30px;
+    margin: 0px 10px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+}
+
+.btn_red::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /*background: linear-gradient(135deg, #6e8efb, #a777e3);*/
+    background: linear-gradient(135deg, #f42533, #910811);
+    border-radius: 4px;
+    -webkit-transition: box-shadow 0.5s ease, -webkit-transform 0.2s ease;
+    transition: box-shadow 0.5s ease, -webkit-transform 0.2s ease;
+    transition: box-shadow 0.5s ease, transform 0.2s ease;
+    transition: box-shadow 0.5s ease, transform 0.2s ease, -webkit-transform 0.2s ease;
+    will-change: transform;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+    transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+}
+
+.btn_gray::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /*background: linear-gradient(135deg, #6e8efb, #a777e3);*/
+    background: linear-gradient(135deg, #a6a6a6, #595959);
+    border-radius: 4px;
+    -webkit-transition: box-shadow 0.5s ease, -webkit-transform 0.2s ease;
+    transition: box-shadow 0.5s ease, -webkit-transform 0.2s ease;
+    transition: box-shadow 0.5s ease, transform 0.2s ease;
+    transition: box-shadow 0.5s ease, transform 0.2s ease, -webkit-transform 0.2s ease;
+    will-change: transform;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+    transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+}
+
+.btn_red:hover::before,
+.btn_gray:hover::before {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn_red::after,
+.btn_gray::after {
+    position: relative;
+    display: inline-block;
+    content: attr(data-title);
+    -webkit-transition: -webkit-transform 0.2s ease;
+    transition: -webkit-transform 0.2s ease;
+    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    will-change: transform;
+    -webkit-transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
+    transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0));
+}
+
+input[type=text],
+select {
+    width: 600px;
+    font-size: 40px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-transition: box-shadow 0.5s ease, -webkit-transform 0.2s ease;
+    transition: box-shadow 0.5s ease, -webkit-transform 0.2s ease;
+    transition: box-shadow 0.5s ease, transform 0.2s ease;
+    transition: box-shadow 0.5s ease, transform 0.2s ease, -webkit-transform 0.2s ease;
+    will-change: transform;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+    transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+}
+
+input[type=submit] {
+    font-size: 36px;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 10px;
+    background: linear-gradient(135deg, #f42533, #910811);
+    border-radius: 4px;
+    -webkit-transition: box-shadow 0.5s ease, -webkit-transform 0.2s ease;
+    transition: box-shadow 0.5s ease, -webkit-transform 0.2s ease;
+    transition: box-shadow 0.5s ease, transform 0.2s ease;
+    transition: box-shadow 0.5s ease, transform 0.2s ease, -webkit-transform 0.2s ease;
+    will-change: transform;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+    transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+    cursor: pointer;
+}
+
+.sign-area {
+    width: 600px;
+    height: 360px;
+    background-color: white;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    -webkit-transition: box-shadow 0.5s ease, -webkit-transform 0.2s ease;
+    transition: box-shadow 0.5s ease, -webkit-transform 0.2s ease;
+    transition: box-shadow 0.5s ease, transform 0.2s ease;
+    transition: box-shadow 0.5s ease, transform 0.2s ease, -webkit-transform 0.2s ease;
+    will-change: transform;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+    transform: translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+}

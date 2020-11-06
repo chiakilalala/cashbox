@@ -1,27 +1,31 @@
 <template>
-    <v-app id="inspire" >
-    <v-main  class="bg-gray-200">
+
+    <v-main  class="outer">
       <v-row no-gutters>
-        <v-col cols="2" class="" >
-          <v-sheet class="" >
+        <v-col cols="2"  class="fill-height" >
+          <v-sheet class="aside bg-gray-200 border-gray-300  overflow-y-auto px-3 py-6" >
+              <ul class="flex-grow mb-3">
               <v-list
                 v-for="(value,name) in UnitOperations"
                 :key="name"
-                class="main-btn"
+                class="mb-1"
               >
-                <v-list-item-title  :color="ButtonColor(value)"  @click="UnitOperation(value)">{{ value.label }}</v-list-item-title></v-list
-              >
+                <v-list-item-subtitle  class="border-r border-solid text-left cursor-pointer hover:bg-blue-100 hover:shadow hover:px-3" :color="ButtonColor(value)"  @click="UnitOperation(value)" >{{ value.label }}</v-list-item-subtitle>
 
+                </v-list
+              >
+            <v-list-item-subtitle class="text-left cursor-pointer hover:bg-blue-100 hover:shadow hover:px-3" ><router-link to="/costomer">離 開</router-link> </v-list-item-subtitle>
+              </ul>
           </v-sheet>
         </v-col>
-        <v-col cols="10">
+        <v-col cols="10" class=" bg-gray-200 " style="height:768px">
               <component :is="currentView"></component>
 
         </v-col>
       </v-row>
 
     </v-main>
-  </v-app>
+
 </template>
 <script>
 import AddCash from '@/components/AddCash.vue'
@@ -29,7 +33,6 @@ import Select from '@/components/Select.vue'
 import RemoveCash from '@/components/RemoveCash.vue'
 import Cashbox from '@/components/Cashbox.vue'
 import CashDiary from '@/components/CashDiary.vue'
-import Statu from '@/components/Statu.vue'
 import CashboxTotal from '@/components/CashboxTotal.vue'
 import cashStatus from '@/components/cashStatus.vue'
 
@@ -41,7 +44,7 @@ export default {
     RemoveCash,
     CashDiary,
     Cashbox,
-    Statu,
+
     CashboxTotal
   },
   data: () => ({
@@ -50,13 +53,13 @@ export default {
     UnitOperations: {
       AddCash: {
         name: 'AddCash',
-        label: '加 鈔',
+        label: '加      鈔',
         pressed: false,
         component: AddCash
       },
       RemoveCash: {
         name: 'RemoveCash',
-        label: '減 鈔',
+        label: '減       鈔',
         pressed: false,
         component: RemoveCash
       },
@@ -84,12 +87,7 @@ export default {
         pressed: false,
         component: CashboxTotal
       }
-      // Exit: {
-      //   name: 'Exit',
-      //   label: '離開',
-      //   pressed: false,
-      //   component: Exit
-      // }
+
     }
   }),
   computed: {},
@@ -106,13 +104,14 @@ export default {
 </script>
 
 <style>
-body {
+body .outer {
   width: 1024px;
   margin: 0 auto;
   background-color: #f8fafc;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  max-height: 768px;
+  overflow-y: hidden;
   line-height: 100%;
   text-align: center;
   font-family: sans-serif;
@@ -129,7 +128,7 @@ body {
   box-shadow: none;
 }
 :root {
-  --font-size-normal: 16px;
+  --font-size-normal: 14px;
   --font-color: #333;
   --button-shadow-outset: 10px 10px 10px rgba(204, 204, 204, 0.9),
     -10px -10px 10px rgba(255, 255, 255, 0.5);

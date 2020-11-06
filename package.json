@@ -10,10 +10,8 @@
   "dependencies": {
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
-    "leaflet": "^1.7.1",
     "tailwindcss": "^1.9.6",
     "vue": "^2.6.12",
-    "vue-axios": "^2.1.5",
     "vue-router": "^3.4.8",
     "vuetify": "^2.3.16"
   },

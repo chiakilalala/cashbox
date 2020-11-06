@@ -1,6 +1,6 @@
 <template>
 
-    <v-container class="fill-height" fluid height="768px">
+    <v-container class="" fluid height="768px">
     <v-row justify="end" no-gutters>
       <v-alert border="left" class="mr-6" color="blue white-text" dense >
       減鈔狀態</v-alert
@@ -59,11 +59,11 @@
     >
     <v-card>
         <v-card-title class="headline">
-           <v-toolbar-title>實際取出</v-toolbar-title>
+        <v-toolbar-title>實際取出</v-toolbar-title>
         </v-card-title>
         <v-card-text>
 
-          <v-list-item-content>
+        <v-list-item-content>
           <v-list-item-title class="subtitle-1">仟元鈔：{{thousand}}  張</v-list-item-title>
         <v-list-item-title class="subtitle-1">百元鈔：{{Hundred}}  張</v-list-item-title>
               <v-spacer></v-spacer>
@@ -107,11 +107,6 @@ export default {
 
   },
   watch: {
-    dialog (val) {
-      if (!val) return
-
-      setTimeout(() => (this.dialog = false), 4000)
-    }
 
   },
   computed: {

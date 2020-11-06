@@ -10,25 +10,25 @@
       >
     </v-row>
           <v-row
-              justify="center"
+
               class=""
+                no-gutters
       >
       <div class="w-full lg:1/2  p-4">
     <v-data-table
       :headers="headers"
       :items="desserts"
-      sort-by="mode"
+      sortable= false
+
       class="elevation-1 rounded-b-lg"
       hide-default-footer
       filterable=false
+
     >
       <template v-slot:top>
           <v-dialog v-model="dialog" max-width="500px">
             <v-card>
-              <!-- <v-card-title>
-                <span class="headline">{{ formTitle }}</span>
-              </v-card-title> -->
-    <header class="bg-blue-300 px-4 py-2 rounded-t text-center text-lg font-bold mb-2">
+          <header class="bg-blue-300 px-4 py-2 rounded-t text-center text-lg font-bold mb-2">
             {{editedItem.name }}鈔箱
           </header>
               <v-card-text>
@@ -36,7 +36,7 @@
                   <v-row>
             <div class="w-full">
               <div class="flex flex-wrap text-left">
-                <div class="w-full  mb-2">
+                <div class="w-full  mb-1">
             <label for="mode" class="block text-grey-darkest text-base mb-2">模式</label>
                 <v-select
                 :items="items"
@@ -44,19 +44,34 @@
                 dense
                 class="modeStyle"
               ></v-select>
-
                 </div>
+                <div class="w-full  mb-2">
+                <v-radio-group
+                    v-model="row"
+                    row
+                  >
+                    <v-radio
+                      label="仟元鈔"
+                      value="radio1"
+                    ></v-radio>
+                    <v-radio
+                      label="百元鈔"
+                      value="radio2"
+                    ></v-radio>
+                </v-radio-group>
+                </div>
+                <!--editedItem.thousand  -->
                 <div class="w-1/2 pr-4 mb-4" >
                   <label for="thousand" class="block text-grey-darkest text-base mb-2">仟元鈔</label>
-                  <input id="thousand" type="text" v-model="editedItem.thousand" class="w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+                <input :disabled ="row == 'radio1'? false : true " id="thousand" type="text" v-model="editedItem.thousand"  class="w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                 </div>
                 <div class="w-1/2 mb-4">
                   <label for="hurend" class="block text-grey-darkest text-base mb-2">百元鈔</label>
-                  <input id="hurend" type="text" v-model="editedItem.hurend" class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+              <input :disabled ="row == 'radio2'? false : true " id="hurend" type="text" v-model="editedItem.hurend"   class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                 </div>
                 <div class="w-full mb-4">
                   <label for="total" class="block text-grey-darkest text-base mb-2">總金額</label>
-                  <input id="total" readonly="readonly" type="text" v-model="total" class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+                  <input disabled id="total" readonly="readonly" type="text" v-model="total" class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                 </div>
               </div>
             </div>
@@ -73,6 +88,7 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
+          <!-- 鈔箱歷史紀錄 -->
         <v-dialog v-model="Historydialog" max-width="500px">
             <v-card>
               <v-card-title>
@@ -106,9 +122,37 @@
                               <td>{{ editedItem.hurend }}</td>
                             <td> {{(editedItem.thousand*1000) + (editedItem.hurend*100)}}</td>
                           </tr>
+                            <tr
+                          >
+                            <td>{{ editedItem.operating }}</td>
+                            <td>{{ editedItem.thousand }}</td>
+                              <td>{{ editedItem.hurend }}</td>
+                            <td> {{(editedItem.thousand*1000) + (editedItem.hurend*100)}}</td>
+                          </tr>
+                          <tr >
+                            <td>{{ editedItem.operating }}</td>
+                            <td>{{ editedItem.thousand }}</td>
+                              <td>{{ editedItem.hurend }}</td>
+                            <td> {{(editedItem.thousand*1000) + (editedItem.hurend*100)}}</td>
+                          </tr>
+                          <tr
+                          >
+                            <td>{{ editedItem.operating }}</td>
+                            <td>{{ editedItem.thousand }}</td>
+                              <td>{{ editedItem.hurend }}</td>
+                            <td> {{(editedItem.thousand*1000) + (editedItem.hurend*100)}}</td>
+                          </tr>
                         </tbody>
                     </template>
                   </v-simple-table>
+                  <div>
+                    <v-pagination
+                    class="text-left"
+                    :length="3"
+                    disabled
+                    v-model="page"
+                  ></v-pagination>
+                  </div>
                 </v-container>
               </v-card-text>
               <v-card-actions>
@@ -117,13 +161,83 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
+          <!-- 鈔箱張數紀錄 -->
+          <v-dialog v-model="CashDialog" max-width="600px">
+            <v-card>
+              <v-card-title>
+                <v-subheader>{{editedItem.name}}鈔箱 鈔票面額張數</v-subheader>
+              </v-card-title>
+                <v-container>
+                <v-simple-table class="border">
+                    <template v-slot:default dense>
+                      <thead style="">
+                        <tr>
+                            <th class="text-left">
+                            貳千元鈔
+                          </th>
+                          <th class="text-left">
+                            千元鈔
+                          </th>
+                          <th class="text-left">
+                            伍佰元鈔
+                          </th>
+                          <th class="text-left">
+                            貳佰元鈔
+                          </th>
+                            <th class="text-left">
+                            百元鈔
+                          </th>
+                          <th class="text-left">
+                            總金額
+                          </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>{{ editedItem.thousand }}</td>
+                              <td>0</td>
+                                <td>0</td>
+                                      <td>{{ editedItem.hurend }}</td>
+                            <td> {{(editedItem.thousand*1000) + (editedItem.hurend*100)}}</td>
+                          </tr>
+                        </tbody>
+                    </template>
+                  </v-simple-table>
 
+                </v-container>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="CashDialogClose">離開</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
       </template>
+        <template v-slot:item.mode="{ item }">
+        {{item.mode !== 'D: deposit only'}}
+        </template>
+        <!-- 模式為 D: deposit only 百元鈔和千元鈔要變成按鈕查看 ＆ 補卸鈔功能隱藏 -->
+        <template v-slot:item.thousand="{ item}">
+          <v-btn v-if="item.mode == 'D: deposit only' " class="accent"  small @click="CashItem(item)">
+         <v-icon>  mdi-cash-multiple  </v-icon>
+         查看
+      </v-btn>
+          <span v-else>{{item.thousand }}</span>
+        </template>
+        <template v-slot:item.hurend="{ item }">
+          <v-btn v-if="item.mode == 'D: deposit only'" class="accent"   small @click="CashItem(item)">
+         <v-icon >  mdi-cash-multiple  </v-icon>
+         查看
+      </v-btn>
+          <span v-else>{{item.hurend }}</span>
+        </template>
         <template v-slot:item.total="{ item }">
           {{(item.thousand*1000) + (item.hurend*100)}}
         </template>
         <template v-slot:item.actions="{ item }">
-        <v-icon medium class="mr-2  text-blue-400" outlined @click="editItem(item)"> mdi-pencil </v-icon>
+          <span v-if="item.mode == 'D: deposit only' "> No </span>
+        <v-icon medium class="mr-2  text-blue-400" outlined @click="editItem(item)" v-else> mdi-pencil </v-icon>
       </template>
       <template v-slot:item.history="{ item }">
       <v-btn
@@ -135,11 +249,18 @@
         查看
       </v-btn>
       </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
+
+      <template v-slot:footer >
+        <div class="text-right mt-2 p-4">
+        <v-btn depressed color="blue darken-4 " class="text-white" @click="deleteall">全部清空</v-btn>
+        </div>
       </template>
+<v-divider
+  inset
+></v-divider>
     </v-data-table>
       </div>
+
           </v-row>
     </v-container>
 </template>
@@ -149,6 +270,10 @@ export default {
   data () {
     return {
       dialog: false,
+      CashDialog: false,
+      CashStatu: 1,
+      page: 1,
+      row: null,
       Historydialog: false,
       items: ['R: recycle', 'D: deposit only', 'P: dispense only', 'M: mix deposit'],
       headers: [
@@ -158,7 +283,7 @@ export default {
           sortable: false,
           value: 'name'
         },
-        { text: '模式', value: 'mode', sortable: false },
+        { text: '模式', value: '.', sortable: false },
         { text: '狀態', value: 'status', sortable: false },
         { text: '仟元鈔(張數)', value: 'thousand', sortable: false },
         { text: '百元鈔(張數)', value: 'hurend', sortable: false },
@@ -172,8 +297,8 @@ export default {
         name: '',
         mode: ['R: recycle', 'D: deposit only', 'P: dispense only', 'M: mix deposit'],
         status: 0,
-        thousand: 1,
-        hurend: 1,
+        thousand: 0,
+        hurend: 0,
         total: 0,
         operating: 0
       },
@@ -181,8 +306,8 @@ export default {
         name: '',
         mode: ['R: recycle', 'D: deposit only', 'P: dispense only', 'M: mix deposit'],
         status: 0,
-        thousand: 1,
-        hurend: 1,
+        thousand: 0,
+        hurend: 0,
         total: 0,
         operating: 0
 
@@ -196,8 +321,16 @@ export default {
     },
     total () {
       return (this.editedItem.thousand * 1000) + (this.editedItem.hurend * 100)
+    },
+    resetAll () {
+      return this.defaultItem
+    },
+    changeZero () {
+      return this.row === 'radio1' ? this.editedItem.hurend === 0 : this.editedItem.hurend
+    },
+    changehurendZero () {
+      return this.row === 'radio2' ? this.editedItem.thousand === 0 : this.editedItem.thousand
     }
-
   },
 
   watch: {
@@ -206,8 +339,10 @@ export default {
     },
     Historydialog (val) {
       val || this.HisotyClose()
+    },
+    CashDialog (val) {
+      val || this.CashDialogClose()
     }
-
   },
 
   created () {
@@ -219,8 +354,8 @@ export default {
       this.desserts = [
         {
           name: 'B1',
-          mode: 'D: deposit only',
-          status: 'F:Full',
+          mode: 'R: recycle',
+          status: 'H:High',
           thousand: 1,
           hurend: 2,
           operating: 'Deposit'
@@ -228,24 +363,24 @@ export default {
         },
         {
           name: 'B2',
-          mode: 'D: deposit only',
-          status: 'F:Full',
+          mode: 'R: recycle',
+          status: 'H:High',
           thousand: 1,
           hurend: 1,
           operating: 'Deposit'
         },
         {
           name: 'B3',
-          mode: 'D: deposit only',
-          status: 'F:Full',
+          mode: 'R: recycle',
+          status: 'H:High',
           thousand: 1,
           hurend: 1,
           operating: 'Deposit'
         },
         {
           name: 'B4',
-          mode: 'D: deposit only',
-          status: 'F:Full',
+          mode: 'R: recycle',
+          status: 'H:High',
           thousand: 1,
           hurend: 1,
           operating: 'Deposit'
@@ -253,7 +388,7 @@ export default {
         {
           name: 'B5',
           mode: 'D: deposit only',
-          status: 'F:Full',
+          status: 'H:High',
           thousand: 1,
           hurend: 1,
           operating: 'Deposit'
@@ -271,6 +406,11 @@ export default {
       this.editedItem = Object.assign({}, item)
       this.Historydialog = true
     },
+    CashItem (item) {
+      this.editedIndex = this.desserts.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.CashDialog = true
+    },
     deleteItem (item) {
       const index = this.desserts.indexOf(item)
       confirm('Are you sure you want to delete this item?') &&
@@ -287,6 +427,9 @@ export default {
     HisotyClose () {
       this.Historydialog = false
     },
+    CashDialogClose () {
+      this.CashDialog = false
+    },
     save () {
       if (this.editedIndex > -1) {
         Object.assign(this.desserts[this.editedIndex], this.editedItem)
@@ -299,6 +442,52 @@ export default {
       const s1 = (this.editedItem.thousand = 0)
       const s2 = (this.editedItem.hurend = 0)
       Object.assign({ s1, s2 }, this.editedItem)
+    },
+    deleteall () {
+      this.desserts = [
+        {
+          name: 'B1',
+          mode: 'R: recycle',
+          status: 'E:Empty',
+          thousand: 0,
+          hurend: 0,
+          operating: 'Unload'
+
+        },
+        {
+          name: 'B2',
+          mode: 'R: recycle',
+          status: 'E:Empty',
+          thousand: 0,
+          hurend: 0,
+          operating: 'Unload'
+        },
+        {
+          name: 'B3',
+          mode: 'R: recycle',
+          status: 'E:Empty',
+          thousand: 0,
+          hurend: 0,
+          operating: 'Unload'
+        },
+        {
+          name: 'B4',
+          mode: 'R: recycle',
+          status: 'E:Empty',
+          thousand: 0,
+          hurend: 0,
+          operating: 'Unload'
+        },
+        {
+          name: 'B5',
+          mode: 'R: recycle',
+          status: 'E:Empty',
+          thousand: 0,
+          hurend: 0,
+          operating: 'Unload'
+        }
+
+      ]
     }
   }
 }
@@ -312,5 +501,8 @@ export default {
   border-radius: 0.25rem;
     transition: border-color 0.2s ease-in-out;
     /* background: #bccaca; */
+}
+.theme--light.v-btn {
+    color:#fff;
 }
 </style>

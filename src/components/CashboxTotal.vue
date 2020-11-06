@@ -20,7 +20,6 @@
       class="elevation-1"
       color='red'
     >
-
     </v-data-table>
 </div>
       </v-row>
