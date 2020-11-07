@@ -10,8 +10,7 @@
                 :key="name"
                 class="mb-1"
               >
-                <v-list-item-subtitle  class="border-r border-solid text-left cursor-pointer hover:bg-blue-100 hover:shadow hover:px-3" :color="ButtonColor(value)"  @click="UnitOperation(value)" >{{ value.label }}</v-list-item-subtitle>
-
+                <v-list-item-subtitle  class="border-r border-solid text-left cursor-pointer hover:bg-blue-100 hover:shadow hover:px-3" :class="ButtonColor(value)"  @click="UnitOperation(value)" >{{ value.label }}</v-list-item-subtitle>
                 </v-list
               >
             <v-list-item-subtitle class="text-left cursor-pointer hover:bg-blue-100 hover:shadow hover:px-3" ><router-link to="/costomer">離 開</router-link> </v-list-item-subtitle>
@@ -20,7 +19,6 @@
         </v-col>
         <v-col cols="10" class=" bg-gray-200 " style="height:768px">
               <component :is="currentView"></component>
-
         </v-col>
       </v-row>
 
@@ -44,12 +42,12 @@ export default {
     RemoveCash,
     CashDiary,
     Cashbox,
-
     CashboxTotal
   },
   data: () => ({
     currentView: 'Select',
     currentUnit: null,
+
     UnitOperations: {
       AddCash: {
         name: 'AddCash',
@@ -93,10 +91,11 @@ export default {
   computed: {},
   methods: {
     ButtonColor (unit) {
-      return unit.pressed ? 'primary' : 'main-btn'
+      return unit.pressed ? 'bg-blue-200' : ''
     },
     UnitOperation (unit) {
       this.currentUnit = unit
+      this.currentUnit.pressed = !this.currentUnit.pressed
       this.currentView = unit.component
     }
   }

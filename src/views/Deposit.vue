@@ -1,20 +1,7 @@
 <template>
   <div>
     <body id="costomer">
-      <header>
-        <div class="container">
-          <div id="branding">
-            <img width="400px" src="@/assets/img/logo.png" />
-          </div>
-          <nav>
-            <div>
-              <div>2020 年 11 月 04 日</div>
-              <div class="date">13:50 星期三</div>
-            </div>
-          </nav>
-        </div>
-      </header>
-
+      <Header/>
       <section id="main">
         <div class="container2">
           <div id="main-col">
@@ -33,8 +20,13 @@
   </div>
 </template>
 <script>
+import Header from '@/components/Header.vue'
 export default {
-  name: 'Deposit'
+  name: 'Deposit',
+  components: {
+    Header
+  }
+
 }
 </script>
 <style lang="scss" scoped>

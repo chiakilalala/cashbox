@@ -1,27 +1,24 @@
 <template>
-  <div>
-    <body id="costomer">
-      <Header/>
-      <section id="main">
-        <div class="container2">
-          <div id="main-col">
-            <h2 class="notice2">
-              請將鈔票放入進鈔口<br>
-              金額: XXXXXX元
-            </h2>
+ <body id="costomer">
+  <header>
+        <div class="container">
+          <div id="branding">
+            <img width="400px" src="@/assets/img/logo.png" />
           </div>
+          <nav>
+            <div>
+              <div>2020 年 11 月 04 日</div>
+              <div class="date">13:50 星期三</div>
+            </div>
+          </nav>
         </div>
-      </section>
-    </body>
-  </div>
+
+  </header>
+ </body>
 </template>
 <script>
-import Header from '@/components/Header.vue'
 export default {
-  name: 'Withdraw',
-  components: {
-    Header
-  }
+  name: 'Header'
 }
 </script>
 <style lang="scss" scoped>

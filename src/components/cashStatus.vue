@@ -4,26 +4,19 @@
             fluid
             height="768px"
     >
-      <v-row justify="end" cols="12">
-      <v-alert border="left" class="mr-6" color="blue white-text" dense >
-        鈔箱狀態</v-alert
-      >
+    <v-row justify="end" cols="12">
+      <v-alert border="left" class="mr-6 white--text" color="blue " dense >
+        鈔箱狀態</v-alert >
     </v-row>
-          <v-row
-
-              class=""
-                no-gutters
-      >
-      <div class="w-full lg:1/2  p-4">
+  <v-row  class="" no-gutters>
+      <div class="w-full ">
     <v-data-table
       :headers="headers"
       :items="desserts"
       sortable= false
-
       class="elevation-1 rounded-b-lg"
       hide-default-footer
       filterable=false
-
     >
       <template v-slot:top>
           <v-dialog v-model="dialog" max-width="500px">
@@ -52,22 +45,22 @@
                   >
                     <v-radio
                       label="仟元鈔"
-                      value="radio1"
+                      :value="radio1"
                     ></v-radio>
                     <v-radio
                       label="百元鈔"
-                      value="radio2"
+                      :value="radio2"
                     ></v-radio>
-                </v-radio-group>
+                        </v-radio-group>
                 </div>
                 <!--editedItem.thousand  -->
                 <div class="w-1/2 pr-4 mb-4" >
-                  <label for="thousand" class="block text-grey-darkest text-base mb-2">仟元鈔</label>
-                <input :disabled ="row == 'radio1'? false : true " id="thousand" type="text" v-model="editedItem.thousand"  class="w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+                <label for="thousand" class="block text-grey-darkest text-base mb-2">仟元鈔</label>
+                <input :disabled ="row == 'radio1'? false : true " id="thousand" type="text" v-model="changehurendZero"  class="w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                 </div>
                 <div class="w-1/2 mb-4">
                   <label for="hurend" class="block text-grey-darkest text-base mb-2">百元鈔</label>
-              <input :disabled ="row == 'radio2'? false : true " id="hurend" type="text" v-model="editedItem.hurend"   class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+                <input :disabled ="row == 'radio2'? false : true " id="hurend" type="text" v-model="changeZero"   class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                 </div>
                 <div class="w-full mb-4">
                   <label for="total" class="block text-grey-darkest text-base mb-2">總金額</label>
@@ -172,10 +165,10 @@
                     <template v-slot:default dense>
                       <thead style="">
                         <tr>
-                            <th class="text-left">
+                            <th class="text-left px-1">
                             貳千元鈔
                           </th>
-                          <th class="text-left">
+                          <th class="text-left px-1">
                             千元鈔
                           </th>
                           <th class="text-left">
@@ -214,8 +207,8 @@
             </v-card>
           </v-dialog>
       </template>
-        <template v-slot:item.mode="{ item }">
-        {{item.mode !== 'D: deposit only'}}
+        <template v-slot:item.mode="{item }">
+        <span :class="getColor(item.mode)">{{item.mode}} </span>
         </template>
         <!-- 模式為 D: deposit only 百元鈔和千元鈔要變成按鈕查看 ＆ 補卸鈔功能隱藏 -->
         <template v-slot:item.thousand="{ item}">
@@ -255,9 +248,9 @@
         <v-btn depressed color="blue darken-4 " class="text-white" @click="deleteall">全部清空</v-btn>
         </div>
       </template>
-<v-divider
-  inset
-></v-divider>
+          <v-divider
+            inset
+          ></v-divider>
     </v-data-table>
       </div>
 
@@ -279,11 +272,11 @@ export default {
       headers: [
         {
           text: '鈔箱名稱',
-          align: 'left',
+          align: 'center',
           sortable: false,
           value: 'name'
         },
-        { text: '模式', value: '.', sortable: false },
+        { text: '模式', value: 'mode', sortable: false },
         { text: '狀態', value: 'status', sortable: false },
         { text: '仟元鈔(張數)', value: 'thousand', sortable: false },
         { text: '百元鈔(張數)', value: 'hurend', sortable: false },
@@ -326,10 +319,10 @@ export default {
       return this.defaultItem
     },
     changeZero () {
-      return this.row === 'radio1' ? this.editedItem.hurend === 0 : this.editedItem.hurend
+      return this.editedItem.hurend
     },
     changehurendZero () {
-      return this.row === 'radio2' ? this.editedItem.thousand === 0 : this.editedItem.thousand
+      return this.editedItem.thousand
     }
   },
 
@@ -342,6 +335,16 @@ export default {
     },
     CashDialog (val) {
       val || this.CashDialogClose()
+    },
+    changeZero: {
+      handler: function () {
+        this.editedItem.hurend = this.row === 'radio1' ? 0 : this.editedItem.hurend
+      }
+    },
+    changehurendZero: {
+      handler: function () {
+        this.editedItem.thousand = this.row === 'radio2' ? 0 : this.editedItem.thousand
+      }
     }
   },
 
@@ -379,7 +382,7 @@ export default {
         },
         {
           name: 'B4',
-          mode: 'R: recycle',
+          mode: 'M: mix deposit',
           status: 'H:High',
           thousand: 1,
           hurend: 1,
@@ -416,7 +419,6 @@ export default {
       confirm('Are you sure you want to delete this item?') &&
         this.desserts.splice(index, 1)
     },
-
     close () {
       this.dialog = false
       this.$nextTick(() => {
@@ -488,6 +490,13 @@ export default {
         }
 
       ]
+    },
+    getColor (mode) {
+      if (mode === 'D:Deposit') return 'cyan--text'
+      else if (mode === 'P: dispense only') return 'purple--text'
+      else if (mode === 'R: recycle') return 'orange--text'
+      else if (mode === 'M: mix deposit') return 'pink--text'
+      else return 'blue--text'
     }
   }
 }

@@ -2,16 +2,16 @@
 
     <v-container class="" fluid height="768px">
     <v-row justify="end" no-gutters>
-      <v-alert border="left" class="mr-6" color="blue white-text" dense >
+      <v-alert border="left" class="mr-6  white--text" color="blue " dense >
       加鈔狀態</v-alert>
     </v-row>
         <v-row justify="center"  cols="7" class="mb-3" no-gutters >
-          <div class="">
+
           <section class="shadow-lg ">
           <header class="bg-blue-400 px-4 py-2 rounded-t text-center text-lg font-bold">
 
           </header>
-            <div class="p-2 bg-white rounded-b">
+            <div class=" bg-white rounded-b">
           <v-col cols="12" >
           <v-row align="center" class="mx-2">
             <div class="" style="padding:30px">
@@ -24,7 +24,7 @@
         </v-col>
             </div>
           </section>
-          </div>
+
       </v-row>
   <v-dialog v-model="addCashNotification" persistent max-width="450" >
       <v-card class="elevation-12">

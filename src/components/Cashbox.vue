@@ -1,7 +1,7 @@
 <template>
   <v-container class="" height="768px">
     <v-row justify="end" cols="12">
-      <v-alert border="left" color="blue mr-5 white-text" dense >
+      <v-alert border="left" color="blue mr-5 " dense class=" white--text">
         現金櫃狀態 </v-alert
       >
     </v-row>

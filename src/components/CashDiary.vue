@@ -4,7 +4,7 @@
             fluid
     >
       <v-row justify="end" cols="12">
-      <v-alert border="left" color="blue" class="text-gray-100 mr-5" dense >
+      <v-alert border="left" color="blue" class=" mr-5  white--text" dense >
         現金櫃日誌 </v-alert
       >
     </v-row>
@@ -13,15 +13,15 @@
               class=""
               no-gutters
       >
-    <div class="w-full lg:1/2  p-4">
+    <div class="w-full  p-0">
     <v-data-table
       :headers="headers"
       :items="desserts"
-      class="elevation-1 text-center text-gray-200"
+      class="elevation-1 text-center text-gray-200 p-0"
 
     >
-      <template v-slot:item.calories="{ item }">
-        <v-chip :color="getColor(item.calories)" dark>{{ item.calories }}</v-chip>
+      <template v-slot:item.TRN="{ item }">
+        <v-chip label :color="getColor(item.TRN)" dark small>{{ item.TRN }}</v-chip>
       </template>
     </v-data-table>
       </div>
@@ -39,7 +39,7 @@ export default {
           text: '交易序號',
           align: 'center',
           sortable: false,
-          value: 'number'
+          value: 'SNO'
 
         },
         { text: '交易日期', value: 'Date', sortable: false },
@@ -47,49 +47,49 @@ export default {
         { text: '交易金額', value: 'Amount', sortable: false },
         { text: '交易類型', value: 'TRN', sortable: false },
         { text: '交易狀態', value: 'Status', sortable: false },
-        { text: '交易說明', value: 'message', sortable: false },
-        { text: '交易人員', value: 'Saving', sortable: false }
+        { text: '交易說明', value: 'Message', sortable: false },
+        { text: '交易人員', value: 'EID', sortable: false }
       ],
       desserts: [
         {
-          number: '100001',
+          SNO: '100001',
           Date: '2020/11/3',
           Time: '13:00',
           Amount: '1,000',
           TRN: 'D:Deposit',
           Status: 0,
-          message: '12:00:45 Deposit $1,000*11',
-          Saving: 'A1'
+          Message: '12:00:45 Deposit $1,000*11',
+          EID: 'A1'
         },
         {
-          number: '100002',
+          SNO: '100002',
           Date: '2020/11/4',
           Time: '13:00',
           Amount: '1,000',
-          TRN: 'D:Deposit',
+          TRN: 'W:Withdraw',
           Status: 0,
-          message: '12:00:45 Deposit $1,000*11',
-          Saving: 'A2'
+          Message: '12:00:45 Deposit $1,000*11',
+          EID: 'A2'
         },
         {
-          number: '100003',
+          SNO: '100003',
           Date: '2020/11/5',
           Time: '13:00',
           Amount: '1,000',
-          TRN: 'D:Deposit',
+          TRN: 'I:Initialization',
           Status: 0,
-          message: '12:00:45 Deposit $1,000*11',
-          Saving: 'A3'
+          Message: '12:00:45 Deposit $1,000*11',
+          EID: 'A3'
         },
         {
-          number: '100004',
+          SNO: '100004',
           Date: '2020/11/5',
           Time: '13:00',
           Amount: '1,000',
-          TRN: 'D:Deposit',
+          TRN: 'Lij:Load',
           Status: 0,
-          message: '12:00:45 Deposit $1,000*11',
-          Saving: 'A4'
+          Message: '12:00:45 Deposit $1,000*11',
+          EID: 'A4'
         }
 
       ]
@@ -97,16 +97,19 @@ export default {
     }
   },
   methods: {
-    getColor (calories) {
-      if (calories === '警告') return 'red'
-      else if (calories > 200) return 'orange'
-      else return 'green'
+    getColor (TRN) {
+      if (TRN === 'D:Deposit') return 'red'
+      else if (TRN === 'W:Withdraw') return 'orange'
+      else return 'blue'
     }
   }
 }
 
 </script>
-<style lang="scss">
+<style lang="scss" >
+ .v-data-table>.v-data-table__wrapper>table>thead>tr>th{
+   padding: 0 5px;
+ }
 .diary .v-text-field .v-input__slot{
 height: 20px;
 padding: 8px ;
@@ -114,6 +117,7 @@ border-radius: 5px;
 }
 thead{
   background-color:#1976D2;
+  padding: 0px ;
 
 }
 .theme--light.v-data-table>.v-data-table__wrapper>table>thead>tr>th {

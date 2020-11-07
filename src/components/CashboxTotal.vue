@@ -5,7 +5,7 @@
             height="768px"
     >
     <v-row justify="end" cols="12">
-      <v-alert border="left" color="blue" class="text-gray-100 mr-5" dense >
+      <v-alert border="left" color="blue" class=" mr-5  white--text" dense >
         現金櫃統計資料 </v-alert
       >
     </v-row>
@@ -50,9 +50,9 @@ export default {
         {
           name: '2020/11/1',
           price: 1000,
-          withdraw: 6.0,
-          deposit: 24,
-          Loading: 4.0,
+          withdraw: 1000,
+          deposit: 1000,
+          Loading: 1000,
           Offload: 1000,
           takeOut: 1,
           Saving: 1
@@ -60,9 +60,9 @@ export default {
         {
           name: '2020/11/2',
           price: 1000,
-          withdraw: 6.0,
-          deposit: 24,
-          Loading: 4.0,
+          withdraw: 1000,
+          deposit: 1000,
+          Loading: 1000,
           Offload: 1000,
           takeOut: 1,
           Saving: 1
@@ -70,9 +70,9 @@ export default {
         {
           name: '2020/11/3',
           price: 1000,
-          withdraw: 6.0,
-          deposit: 24,
-          Loading: 4.0,
+          withdraw: 1000,
+          deposit: 1000,
+          Loading: 1000,
           Offload: 1000,
           takeOut: 1,
           Saving: 1
@@ -80,9 +80,9 @@ export default {
         {
           name: '2020/11/4',
           price: 1000,
-          withdraw: 6.0,
-          deposit: 24,
-          Loading: 4.0,
+          withdraw: 1000,
+          deposit: 1000,
+          Loading: 1000,
           Offload: 1000,
           takeOut: 1,
           Saving: 1
