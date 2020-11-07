@@ -40,27 +40,27 @@
                 </div>
                 <div class="w-full  mb-2">
                 <v-radio-group
-                    v-model="row"
+                    v-model="editedItem.row"
                     row
                   >
                     <v-radio
                       label="仟元鈔"
-                      :value="radio1"
+                      value="radio1"
                     ></v-radio>
                     <v-radio
                       label="百元鈔"
-                      :value="radio2"
+                      value="radio2"
                     ></v-radio>
                         </v-radio-group>
                 </div>
                 <!--editedItem.thousand  -->
                 <div class="w-1/2 pr-4 mb-4" >
                 <label for="thousand" class="block text-grey-darkest text-base mb-2">仟元鈔</label>
-                <input :disabled ="row == 'radio1'? false : true " id="thousand" type="text" v-model="changehurendZero"  class="w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+                <input :disabled ="editedItem.row == 'radio1'? false : true " id="thousand" type="text" v-model="changehurendZero"  class="w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                 </div>
                 <div class="w-1/2 mb-4">
                   <label for="hurend" class="block text-grey-darkest text-base mb-2">百元鈔</label>
-                <input :disabled ="row == 'radio2'? false : true " id="hurend" type="text" v-model="changeZero"   class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+                <input :disabled ="editedItem.row == 'radio2'? false : true " id="hurend" type="text" v-model="changeZero"   class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                 </div>
                 <div class="w-full mb-4">
                   <label for="total" class="block text-grey-darkest text-base mb-2">總金額</label>
@@ -266,7 +266,6 @@ export default {
       CashDialog: false,
       CashStatu: 1,
       page: 1,
-      row: null,
       Historydialog: false,
       items: ['R: recycle', 'D: deposit only', 'P: dispense only', 'M: mix deposit'],
       headers: [
@@ -293,7 +292,8 @@ export default {
         thousand: 0,
         hurend: 0,
         total: 0,
-        operating: 0
+        operating: 0,
+        row: null
       },
       defaultItem: {
         name: '',
@@ -302,7 +302,8 @@ export default {
         thousand: 0,
         hurend: 0,
         total: 0,
-        operating: 0
+        operating: 0,
+        row: null
 
       }
     }
@@ -361,7 +362,8 @@ export default {
           status: 'H:High',
           thousand: 1,
           hurend: 2,
-          operating: 'Deposit'
+          operating: 'Deposit',
+          row: null
 
         },
         {
@@ -370,7 +372,8 @@ export default {
           status: 'H:High',
           thousand: 1,
           hurend: 1,
-          operating: 'Deposit'
+          operating: 'Deposit',
+          row: null
         },
         {
           name: 'B3',
@@ -378,7 +381,8 @@ export default {
           status: 'H:High',
           thousand: 1,
           hurend: 1,
-          operating: 'Deposit'
+          operating: 'Deposit',
+          row: null
         },
         {
           name: 'B4',
@@ -386,7 +390,8 @@ export default {
           status: 'H:High',
           thousand: 1,
           hurend: 1,
-          operating: 'Deposit'
+          operating: 'Deposit',
+          row: null
         },
         {
           name: 'B5',
@@ -394,7 +399,8 @@ export default {
           status: 'H:High',
           thousand: 1,
           hurend: 1,
-          operating: 'Deposit'
+          operating: 'Deposit',
+          row: null
         }
 
       ]
