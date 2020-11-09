@@ -1,6 +1,6 @@
 <template>
   <div>
-   <article id="costomer">
+   <article id="costomer" style="  background-color: #DBDCDC;">
     <header>
         <div class="container">
             <div id="branding">
@@ -32,7 +32,7 @@
                 <ul id="services">
                     <span class="" style="color: #DBDCDC;">{{goto}} </span>
                     <li>
-                        <router-link to="/"><img src="https://upload.cc/i1/2020/10/23/i0cthz.png" class="e-img mx-auto"></router-link>
+                        <router-link to="/"><img :src="cashImage" class="e-img mx-auto"></router-link>
                     </li>
 
                 </ul>
@@ -52,7 +52,8 @@ export default {
       left: false,
       right: false,
       bottomleft: false,
-      bottomRight: false
+      bottomRight: false,
+      cashImage: require('@/assets/img/machine.png')
     }
   },
   methods: {
@@ -77,6 +78,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "@/assets/scss/costom.scss";
+body div#costomer{
+    background-color: #DBDCDC;
+}
 #costomer .v-btn--contained {
     box-shadow:none;
     /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); */
@@ -97,7 +101,7 @@ article#costomer{
     padding: 0;
     margin: 0;
     width: 100% !important;
-    /*background-color:#f4f4f4;*/
+height: 100vh;
     background-color: #DBDCDC;
     letter-spacing: 1px;
     /*background-image: url("paper.gif");*/

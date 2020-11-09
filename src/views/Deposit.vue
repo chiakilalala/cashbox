@@ -6,12 +6,10 @@
         <div class="container2">
           <div id="main-col">
 
-            <h2 class="notice2">
-              請從出鈔口取出鈔票<br>
-              千元鈔XXX張<br>
-              百元鈔XXX張<br>
-              金額XXXXXX元
-            </h2>
+             <h2 class="subtitle texr-left">請從出鈔口取出鈔票 </h2>
+              <h2 class="notice2"><span>百元鈔：</span>XXX 張</h2>
+            <h2 class="notice2">  <span>仟元鈔：</span>XXX 張</h2>
+             <h2 class="page-title"> 金  額：XXXXXX 元</h2>
           </div>
 
         </div>
@@ -44,4 +42,68 @@ body#costomer {
     background-repeat: no-repeat;
     background-position: center top;
 }
+#main-col h2{
+    font-size: 30px;
+    color: #666666;
+   text-align: unset;
+}
+h2.page-title {
+    font-size: 30px !important;
+    border-top: 4px #ccc solid;
+    padding: 0 20px;
+    width: 420px;
+    margin: 0 auto;
+    display: block;
+    }
+    .price {
+        text-align: right;
+        display: inline-flex;
+        justify-content: flex-end;
+        width: 73%;
+    }
+
+    .Status {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        display: inline-block;
+        /* border: 1px solid #333; */
+        margin-right: 10px;
+    }
+
+    .circle {
+        float: right;
+        clear: both;
+        display: flex;
+        align-items: center;
+    }
+
+    .safe {
+        background-color: #93c903;
+    }
+
+    .danger {
+        background-color: #cc3467;
+    }
+
+    .warn {
+        background-color: #ffdf7c
+    }
+
+    .container2 {
+        max-width: 750px;
+    }
+
+    .price_container {
+       display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    }
+    .notice2{
+          margin: 0px 80px;
+          span{
+            margin-left: -48px;
+          }
+    }
 </style>

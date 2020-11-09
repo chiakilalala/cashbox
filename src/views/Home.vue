@@ -3,18 +3,26 @@
     <v-main  class="outer">
       <v-row no-gutters>
         <v-col cols="2"  class="fill-height" >
-          <v-sheet class="aside bg-gray-200 border-gray-300  overflow-y-auto px-3 py-6" >
-              <ul class="flex-grow mb-3">
-              <v-list
-                v-for="(value,name) in UnitOperations"
+          <v-sheet class="aside bg-gray-200 border-gray-300  " >
+
+                  <v-list
+        dense
+      >
+              <v-list-item
+               v-for="(value,name) in UnitOperations"
                 :key="name"
-                class="mb-1"
-              >
-                <v-list-item-subtitle  class="border-r border-solid text-left cursor-pointer hover:bg-blue-100 hover:shadow hover:px-3" :class="ButtonColor(value)"  @click="UnitOperation(value)" >{{ value.label }}</v-list-item-subtitle>
-                </v-list
-              >
-            <v-list-item-subtitle class="text-left cursor-pointer hover:bg-blue-100 hover:shadow hover:px-3" ><router-link to="/costomer">離 開</router-link> </v-list-item-subtitle>
-              </ul>
+                 class="hover:px-3 hover:py-10"
+
+                >
+      <v-list-item-icon>
+            <v-icon small>{{ value.icon }}</v-icon>
+          </v-list-item-icon>
+                <v-list-item-title  class=" border-r border-solid text-left cursor-pointer hover:bg-blue-100 hover:shadow  text-lg" :class="ButtonColor(value)"  @click="UnitOperation(value)" >{{ value.label }}</v-list-item-title>
+              </v-list-item>
+            <v-list-item-subtitle class="bg-blue-600 cursor-pointer hover:bg-blue-100 hover:shadow hover:px-3" ><router-link to="/costomer">離 開</router-link>
+            </v-list-item-subtitle>
+                  </v-list>
+
           </v-sheet>
         </v-col>
         <v-col cols="10" class=" bg-gray-200 " style="height:768px">
@@ -53,37 +61,43 @@ export default {
         name: 'AddCash',
         label: '加      鈔',
         pressed: false,
-        component: AddCash
+        component: AddCash,
+        icon: 'mdi-cash'
       },
       RemoveCash: {
         name: 'RemoveCash',
         label: '減       鈔',
         pressed: false,
-        component: RemoveCash
+        component: RemoveCash,
+        icon: 'mdi-cash'
       },
       Statu: {
         name: 'cashStatus',
         label: '鈔箱狀態(補/卸鈔)',
         pressed: false,
-        component: cashStatus
+        component: cashStatus,
+        icon: 'mdi-clipboard-list'
       },
       Cashbox: {
         name: 'Cashbox',
         label: '現金櫃狀態',
         pressed: false,
-        component: Cashbox
+        component: Cashbox,
+        icon: 'mdi-inbox-multiple'
       },
       CashDiary: {
         name: 'CashDiary',
         label: '現金櫃日誌',
         pressed: false,
-        component: CashDiary
+        component: CashDiary,
+        icon: 'mdi-note-multiple'
       },
       CashboxTotal: {
         name: 'CashboxTotal',
         label: '現金櫃統計資料',
         pressed: false,
-        component: CashboxTotal
+        component: CashboxTotal,
+        icon: 'mdi-folder-cog'
       }
 
     }
@@ -95,7 +109,7 @@ export default {
     },
     UnitOperation (unit) {
       this.currentUnit = unit
-      this.currentUnit.pressed = !this.currentUnit.pressed
+      // this.currentUnit.pressed = !this.currentUnit.pressed
       this.currentView = unit.component
     }
   }
@@ -144,5 +158,8 @@ body .outer {
 }
 #inspire .theme--light.v-list.primary{
 background-color: aliceblue;
+}
+.v-application--is-ltr .v-list-item__action:first-child, .v-application--is-ltr .v-list-item__icon:first-child {
+    margin-right: 2px;
 }
 </style>

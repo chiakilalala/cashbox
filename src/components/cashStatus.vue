@@ -27,10 +27,9 @@
               <v-card-text>
                 <v-container>
                   <v-row>
-            <div class="w-full">
-              <div class="flex flex-wrap text-left">
+              <div class="w-full flex flex-wrap text-left">
                 <div class="w-full  mb-1">
-            <label for="mode" class="block text-grey-darkest text-base mb-2">模式</label>
+                <label for="mode" class="block text-grey-darkest text-base mb-2">模式</label>
                 <v-select
                 :items="items"
                 v-model="editedItem.mode"
@@ -38,7 +37,10 @@
                 class="modeStyle"
               ></v-select>
                 </div>
-                <div class="w-full  mb-2">
+
+                <div class="w-full flex-wrap" v-if="editedItem.mode != 'D: deposit only'">
+                   <div class="w-full  mb-2">
+                         <span class="caption text-blue-500">請先選擇 仟元或百元 </span>
                 <v-radio-group
                     v-model="editedItem.row"
                     row
@@ -52,21 +54,25 @@
                       value="radio2"
                     ></v-radio>
                         </v-radio-group>
-                </div>
+                   </div>
                 <!--editedItem.thousand  -->
+
+                  <div class="d-flex " >
                 <div class="w-1/2 pr-4 mb-4" >
                 <label for="thousand" class="block text-grey-darkest text-base mb-2">仟元鈔</label>
-                <input :disabled ="editedItem.row == 'radio1'? false : true " id="thousand" type="text" v-model="changehurendZero"  class="w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+                <input :disabled ="editedItem.row != 'radio1'" id="thousand" type="text" v-model="changehurendZero" class="w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                 </div>
                 <div class="w-1/2 mb-4">
                   <label for="hurend" class="block text-grey-darkest text-base mb-2">百元鈔</label>
-                <input :disabled ="editedItem.row == 'radio2'? false : true " id="hurend" type="text" v-model="changeZero"   class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+                <input :disabled ="editedItem.row != 'radio2'" id="hurend" type="text" v-model="changeZero" class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                 </div>
+
                 <div class="w-full mb-4">
                   <label for="total" class="block text-grey-darkest text-base mb-2">總金額</label>
                   <input disabled id="total" readonly="readonly" type="text" v-model="total" class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                 </div>
-              </div>
+                 </div>
+            </div>
             </div>
                   </v-row>
                 </v-container>
@@ -229,8 +235,8 @@
           {{(item.thousand*1000) + (item.hurend*100)}}
         </template>
         <template v-slot:item.actions="{ item }">
-          <span v-if="item.mode == 'D: deposit only' "> No </span>
-        <v-icon medium class="mr-2  text-blue-400" outlined @click="editItem(item)" v-else> mdi-pencil </v-icon>
+
+        <v-icon medium class="mr-2  text-blue-400" outlined @click="editItem(item)"> mdi-pencil </v-icon>
       </template>
       <template v-slot:item.history="{ item }">
       <v-btn
@@ -262,6 +268,10 @@ export default {
   name: 'cashStatus',
   data () {
     return {
+      thousand: 0,
+      hurend: 0,
+      Temthousand: 0,
+      Temhurend: 0,
       dialog: false,
       CashDialog: false,
       CashStatu: 1,
@@ -284,15 +294,25 @@ export default {
         { text: '補/卸鈔', value: 'actions', sortable: false }
       ],
       desserts: [],
-      editedIndex: -1,
-      editedItem: {
+      temporary: {
         name: '',
-        mode: ['R: recycle', 'D: deposit only', 'P: dispense only', 'M: mix deposit'],
+        mode: '',
         status: 0,
         thousand: 0,
         hurend: 0,
         total: 0,
-        operating: 0,
+        operating: null,
+        row: null
+      },
+      editedIndex: -1,
+      editedItem: {
+        name: '',
+        mode: '',
+        status: '',
+        thousand: 0,
+        hurend: 0,
+        total: 0,
+        operating: null,
         row: null
       },
       defaultItem: {
@@ -319,11 +339,21 @@ export default {
     resetAll () {
       return this.defaultItem
     },
-    changeZero () {
-      return this.editedItem.hurend
+    changeZero: {
+      get () {
+        return this.getHurend()
+      },
+      set (value) {
+        this.editedItem.hurend = value
+      }
     },
-    changehurendZero () {
-      return this.editedItem.thousand
+    changehurendZero: {
+      get () {
+        return this.getThousand()
+      },
+      set (value) {
+        this.editedItem.thousand = value
+      }
     }
   },
 
@@ -336,16 +366,6 @@ export default {
     },
     CashDialog (val) {
       val || this.CashDialogClose()
-    },
-    changeZero: {
-      handler: function () {
-        this.editedItem.hurend = this.row === 'radio1' ? 0 : this.editedItem.hurend
-      }
-    },
-    changehurendZero: {
-      handler: function () {
-        this.editedItem.thousand = this.row === 'radio2' ? 0 : this.editedItem.thousand
-      }
     }
   },
 
@@ -437,6 +457,14 @@ export default {
     },
     CashDialogClose () {
       this.CashDialog = false
+    },
+    getHurend () {
+      this.editedItem.hurend = this.editedItem.row !== 'radio2' ? 0 : this.editedItem.hurend
+      return this.editedItem.hurend
+    },
+    getThousand () {
+      this.editedItem.thousand = this.editedItem.row !== 'radio1' ? 0 : this.editedItem.thousand
+      return this.editedItem.thousand
     },
     save () {
       if (this.editedIndex > -1) {

@@ -48,7 +48,7 @@ export default {
       ],
       desserts: [
         {
-          name: '2020/11/1',
+          name: '2020-11-3',
           price: 1000,
           withdraw: 1000,
           deposit: 1000,
@@ -58,7 +58,7 @@ export default {
           Saving: 1
         },
         {
-          name: '2020/11/2',
+          name: '2020-11-4',
           price: 1000,
           withdraw: 1000,
           deposit: 1000,
@@ -68,7 +68,7 @@ export default {
           Saving: 1
         },
         {
-          name: '2020/11/3',
+          name: '2020-11-4',
           price: 1000,
           withdraw: 1000,
           deposit: 1000,
@@ -78,7 +78,7 @@ export default {
           Saving: 1
         },
         {
-          name: '2020/11/4',
+          name: '2020-11-4',
           price: 1000,
           withdraw: 1000,
           deposit: 1000,
@@ -98,6 +98,11 @@ export default {
 }
 
 </script>
-<style lang="">
-
+<style lang="scss">
+ .diary .v-text-field .v-input__slot{
+height: 30px;
+padding: 8px ;
+border-radius: 5px;
+background: #fff;
+}
 </style>

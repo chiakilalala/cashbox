@@ -24,6 +24,27 @@
                 </div>
             </div>
             </div>
+            <v-dialog v-model="Dialog" persistent max-width="450" >
+      <v-card class="elevation-12">
+        <v-toolbar color="primary" dark flat dense>
+          <v-toolbar-title>登入失敗</v-toolbar-title>
+        </v-toolbar>
+        <v-container  fluid  height="300">
+          <v-row align="center" justify="center">
+            <v-col cols="12" align="center">
+            <div  style="text-align: center; padding: 60px;">
+              <v-img :src="errorImage" max-width="250" class="mx-auto"></v-img>
+                    <v-list-item-title class="subtitle-1">請輸入正確的帳號密碼 </v-list-item-title>
+                </div>
+            </v-col>
+          </v-row>
+        </v-container>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" @click="Dialog= false">關閉</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
           </v-row>
       </v-container>
     </v-main>
@@ -36,7 +57,9 @@ export default {
       user: {
         username: '',
         password: ''
-      }
+      },
+      Dialog: false,
+      errorImage: require('@/assets/img/error.png')
 
     }
   },
@@ -45,7 +68,7 @@ export default {
       if (this.user.username !== '' && this.user.password !== '') {
         this.$router.push({ name: 'Home' })
       } else if (this.user.username === '' || this.user.password === '') {
-        this.$router.push({ path: 'login' })
+        this.Dialog = true
       }
     }
   }

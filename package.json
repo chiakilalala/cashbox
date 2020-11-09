@@ -1,57 +1,57 @@
 {
-  "name": "cash_job",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "axios": "^0.20.0",
-    "core-js": "^3.6.5",
-    "tailwindcss": "^1.9.6",
-    "vue": "^2.6.12",
-    "vue-router": "^3.4.8",
-    "vuetify": "^2.3.16"
-  },
-  "devDependencies": {
-    "@mdi/font": "^5.8.55",
-    "@vue/cli-plugin-babel": "^4.5.6",
-    "@vue/cli-plugin-eslint": "^4.5.6",
-    "@vue/cli-plugin-router": "^4.5.8",
-    "@vue/cli-service": "^4.5.6",
-    "@vue/eslint-config-standard": "^5.1.2",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-vue": "^6.2.2",
-    "sass": "^1.26.11",
-    "sass-loader": "^10.0.2",
-    "vue-template-compiler": "^2.6.12"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
+    "name": "cash_job",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
     },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/standard"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
+    "dependencies": {
+        "axios": "^0.20.0",
+        "core-js": "^3.6.5",
+        "tailwindcss": "^1.9.6",
+        "vue": "^2.6.12",
+        "vue-router": "^3.4.8",
+        "vuetify": "^2.3.16"
     },
-    "rules": {
-      "vue/no-dupe-keys": "off"
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "devDependencies": {
+        "@mdi/font": "^5.8.55",
+        "@vue/cli-plugin-babel": "^4.5.6",
+        "@vue/cli-plugin-eslint": "^4.5.8",
+        "@vue/cli-plugin-router": "^4.5.8",
+        "@vue/cli-service": "^4.5.6",
+        "@vue/eslint-config-standard": "^5.1.2",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.13.0",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.2.1",
+        "eslint-plugin-standard": "^4.0.1",
+        "eslint-plugin-vue": "^6.2.2",
+        "sass": "^1.26.11",
+        "sass-loader": "^10.0.2",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "eslintConfig": {
+        "root": true,
+        "env": {
+            "node": true
+        },
+        "extends": [
+            "plugin:vue/essential",
+            "@vue/standard"
+        ],
+        "parserOptions": {
+            "parser": "babel-eslint"
+        },
+        "rules": {
+            "vue/no-dupe-keys": "off"
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ]
 }
