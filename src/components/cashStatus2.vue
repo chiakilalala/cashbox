@@ -26,18 +26,18 @@
                       <div class="w-full flex-wrap" v-if="editedItem.mode != 'D: deposit only'">
                         <div class="w-full  mb-2">
                           <label for="thousand" class="block text-grey-darkest text-base mb-2">鈔票面額</label>
-                          <input disabled id="thousand" readonly="readonly" disable type="text" v-model.number="editedItem.Denominations" class="focus:border-blue-400 w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+                          <input id="thousand" type="text" v-model="changehurendZero" class="w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                         </div>
                         <!--editedItem.thousand  -->
 
                         <div class=" mb-4">
                           <div class="w-full  mb-4">
                             <label for="piece" class="block text-grey-darkest text-base mb-2">鈔票張數</label>
-                            <input id="piece" type="text" v-model.number="editedItem.piece" class=" w-full text-base bg-grey-200 border border-solid border-blue-500 text-grey-darkest outline-0 rounded px-2 py-2 " autofocus="autofocus">
+                            <input id="piece" type="text" v-model="changehurendZero" class="w-full text-base bg-grey-200 border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                           </div>
                           <div class="w-full mb-4">
                             <label for="total" class="block text-grey-darkest text-base mb-2">總金額</label>
-                            <input disabled id="total" readonly="readonly" type="text" v-model.number="NewTotal" class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
+                            <input disabled id="total" readonly="readonly" type="text" v-model="total" class="w-full text-base bg-grey-200  border border-solid border-grey-light text-grey-darkest outline-0 rounded px-2 py-2">
                           </div>
                         </div>
                       </div>
@@ -172,55 +172,27 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-          <!-- 確定是否要清空鈔箱？ -->
-          <v-dialog v-model="Waringdialog" max-width="500px">
-            <v-card>
-              <v-toolbar color="primary" dark flat dense>
-                <v-toolbar-title>清空鈔箱</v-toolbar-title>
-              </v-toolbar>
-              <v-card-text>
-                <v-container fluid height="300">
-                  <v-row align="center" justify="center">
-                    <v-col cols="12" align="center">
-                      <div style="text-align: center; padding: 0x;">
-                        <v-list-item-content>
-                          <v-img :src="noticeImage" max-width="250" class="mx-auto"></v-img>
-                          <v-list-item-title class="subtitle-1">確定清空所有鈔箱？ </v-list-item-title>
-                        </v-list-item-content>
-                      </div>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-              <v-card-actions justify="space-around">
-                <v-spacer></v-spacer>
-                <v-btn color="grey" @click="WaringdialogClose">放棄</v-btn>
-                <v-btn color="red darken-1" @click="deleteall">確定</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
         </template>
         <template v-slot:item.mode="{item }">
           <span :class="getColor(item.mode)">{{item.mode}} </span>
         </template>
-        <!-- 模式為 D: deposit only 面額和張數要變成按鈕查看 ＆ 補卸鈔功能隱藏 -->
-        <template v-slot:item.Denominations="{ item}">
+        <!-- 模式為 D: deposit only 百元鈔和千元鈔要變成按鈕查看 ＆ 補卸鈔功能隱藏 -->
+        <template v-slot:item.thousand="{ item}">
           <v-btn v-if="item.mode == 'D: deposit only' " class="accent" small @click="CashItem(item)">
             <v-icon> mdi-cash-multiple </v-icon>
             查看
           </v-btn>
-          <span v-else>{{item.Denominations }}</span>
-
+          <span v-else>{{item.thousand }}</span>
         </template>
-        <template v-slot:item.piece="{ item }">
+        <template v-slot:item.hurend="{ item }">
           <v-btn v-if="item.mode == 'D: deposit only'" class="accent" small @click="CashItem(item)">
             <v-icon> mdi-cash-multiple </v-icon>
             查看
           </v-btn>
-          <span v-else>{{item.piece }}</span>
+          <span v-else>{{item.hurend }}</span>
         </template>
         <template v-slot:item.total="{ item }">
-          {{(item.Denominations) * (item.piece)}}
+          {{(item.thousand*1000) + (item.hurend*100)}}
         </template>
         <template v-slot:item.actions="{ item }">
           <span class="" v-if="item.mode == 'D: deposit only'"> No </span>
@@ -234,10 +206,10 @@
 
         <template v-slot:footer>
           <div class="text-right mt-2 p-4">
-            <v-btn depressed color="blue darken-4 " class="text-white" @click="Waringdialog = true">全部清空</v-btn>
+            <v-btn depressed color="blue darken-4 " class="text-white" @click="deleteall">全部清空</v-btn>
           </div>
         </template>
-
+        <v-divider inset></v-divider>
       </v-data-table>
     </div>
 
@@ -256,8 +228,6 @@ export default {
       Temhurend: 0,
       dialog: false,
       CashDialog: false,
-      Waringdialog: false,
-      noticeImage: require('@/assets/img/notice.png'),
       CashStatu: 1,
       page: 1,
       Historydialog: false,
@@ -279,13 +249,13 @@ export default {
         sortable: false
       },
       {
-        text: '鈔票面額',
-        value: 'Denominations',
+        text: '仟元鈔(張數)',
+        value: 'thousand',
         sortable: false
       },
       {
-        text: '鈔票張數',
-        value: 'piece',
+        text: '百元鈔(張數)',
+        value: 'hurend',
         sortable: false
       },
       {
@@ -305,14 +275,22 @@ export default {
       }
       ],
       desserts: [],
+      temporary: {
+        name: '',
+        mode: '',
+        status: 0,
+        thousand: 0,
+        hurend: 0,
+        total: 0,
+        operating: null,
+        row: null
+      },
       editedIndex: -1,
       editedItem: {
         name: '',
         mode: '',
         status: '',
         thousand: 0,
-        Denominations: 1000,
-        piece: 0,
         hurend: 0,
         total: 0,
         operating: null,
@@ -322,8 +300,6 @@ export default {
         name: '',
         mode: ['R: recycle', 'D: deposit only', 'P: dispense only', 'M: mix deposit'],
         status: 0,
-        Denominations: 1000,
-        piece: 0,
         thousand: 0,
         hurend: 0,
         total: 0,
@@ -335,11 +311,30 @@ export default {
   },
 
   computed: {
+    formTitle () {
+      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+    },
     total () {
       return (this.editedItem.thousand * 1000) + (this.editedItem.hurend * 100)
     },
-    NewTotal () {
-      return (this.editedItem.Denominations) * (this.editedItem.piece)
+    resetAll () {
+      return this.defaultItem
+    },
+    changeZero: {
+      get () {
+        return this.getHurend()
+      },
+      set (value) {
+        this.editedItem.hurend = value
+      }
+    },
+    changehurendZero: {
+      get () {
+        return this.getThousand()
+      },
+      set (value) {
+        this.editedItem.thousand = value
+      }
     }
   },
 
@@ -352,9 +347,6 @@ export default {
     },
     CashDialog (val) {
       val || this.CashDialogClose()
-    },
-    Waringdialog (val) {
-      val || this.WaringdialogClose()
     }
   },
 
@@ -368,9 +360,7 @@ export default {
         name: 'B1',
         mode: 'R: recycle',
         status: 'H:High',
-        thousand: 1000,
-        Denominations: 1000,
-        piece: 4,
+        thousand: 1,
         hurend: 2,
         operating: 'Deposit',
         row: null
@@ -380,9 +370,7 @@ export default {
         name: 'B2',
         mode: 'R: recycle',
         status: 'H:High',
-        thousand: 1000,
-        Denominations: 1000,
-        piece: 1,
+        thousand: 1,
         hurend: 1,
         operating: 'Deposit',
         row: null
@@ -391,9 +379,7 @@ export default {
         name: 'B3',
         mode: 'R: recycle',
         status: 'H:High',
-        thousand: 1000,
-        Denominations: 1000,
-        piece: 1,
+        thousand: 1,
         hurend: 1,
         operating: 'Deposit',
         row: null
@@ -402,9 +388,7 @@ export default {
         name: 'B4',
         mode: 'M: mix deposit',
         status: 'H:High',
-        thousand: 100,
-        Denominations: 100,
-        piece: 1,
+        thousand: 1,
         hurend: 1,
         operating: 'Deposit',
         row: null
@@ -413,9 +397,7 @@ export default {
         name: 'B5',
         mode: 'D: deposit only',
         status: 'H:High',
-        thousand: 100,
-        Denominations: 100,
-        piece: 2,
+        thousand: 1,
         hurend: 1,
         operating: 'Deposit',
         row: null
@@ -456,8 +438,13 @@ export default {
     CashDialogClose () {
       this.CashDialog = false
     },
-    WaringdialogClose () {
-      this.Waringdialog = false
+    getHurend () {
+      this.editedItem.hurend = this.editedItem.row !== 'radio2' ? 0 : this.editedItem.hurend
+      return this.editedItem.hurend
+    },
+    getThousand () {
+      this.editedItem.thousand = this.editedItem.row !== 'radio1' ? 0 : this.editedItem.thousand
+      return this.editedItem.thousand
     },
     save () {
       if (this.editedIndex > -1) {
@@ -468,8 +455,10 @@ export default {
       this.close()
     },
     reset (item) {
-      const s2 = (this.editedItem.piece = 0)
+      const s1 = (this.editedItem.thousand = 0)
+      const s2 = (this.editedItem.hurend = 0)
       Object.assign({
+        s1,
         s2
       }, this.editedItem)
     },
@@ -478,18 +467,15 @@ export default {
         name: 'B1',
         mode: 'R: recycle',
         status: 'E:Empty',
-        Denominations: 1000,
-        piece: 0,
         thousand: 0,
         hurend: 0,
         operating: 'Unload'
+
       },
       {
         name: 'B2',
         mode: 'R: recycle',
         status: 'E:Empty',
-        Denominations: 1000,
-        piece: 0,
         thousand: 0,
         hurend: 0,
         operating: 'Unload'
@@ -498,8 +484,6 @@ export default {
         name: 'B3',
         mode: 'R: recycle',
         status: 'E:Empty',
-        Denominations: 1000,
-        piece: 0,
         thousand: 0,
         hurend: 0,
         operating: 'Unload'
@@ -508,8 +492,6 @@ export default {
         name: 'B4',
         mode: 'R: recycle',
         status: 'E:Empty',
-        Denominations: 1000,
-        piece: 0,
         thousand: 0,
         hurend: 0,
         operating: 'Unload'
@@ -518,15 +500,12 @@ export default {
         name: 'B5',
         mode: 'R: recycle',
         status: 'E:Empty',
-        Denominations: 1000,
-        piece: 0,
         thousand: 0,
         hurend: 0,
         operating: 'Unload'
       }
 
       ]
-      this.WaringdialogClose()
     },
     getColor (mode) {
       if (mode === 'D:Deposit') return 'cyan--text'

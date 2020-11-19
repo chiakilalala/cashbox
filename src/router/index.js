@@ -29,7 +29,7 @@ const routes = [{
     import(/* webpackChunkName: "about" */ '../views/Finish.vue')
 },
 {
-  path: '/Deposit',
+  path: '/deposit',
   name: 'Deposit',
   component: () =>
     import(/* webpackChunkName: "about" */ '../views/Deposit.vue')

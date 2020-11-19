@@ -105,10 +105,10 @@ export default {
   }),
   computed: {},
   methods: {
-    ButtonColor(unit) {
+    ButtonColor (unit) {
       return unit.pressed ? 'bg-blue-200' : ''
     },
-    UnitOperation(unit) {
+    UnitOperation (unit) {
       this.currentUnit = unit
       // this.currentUnit.pressed = !this.currentUnit.pressed
       this.currentView = unit.component
